@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest-cov
+
+      - name: Run flake8
+        run: flake8
+
+      - name: Run tests with coverage
+        env:
+          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          DEBUG: 'False'
+          ALLOWED_HOSTS: '127.0.0.1,localhost'
+        run: |
+          pytest --cov=lettings --cov=profiles --cov=oc_lettings_site --cov-report=term-missing --cov-fail-under=80
