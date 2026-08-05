@@ -58,3 +58,12 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/oc-lettings:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/oc-lettings:${{ github.sha }}
+    
+  deploy:
+    needs: docker-build-push
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Render deployment
+        run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
