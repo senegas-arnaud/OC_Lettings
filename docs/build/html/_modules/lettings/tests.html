@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lettings.tests &mdash; Documentation OC_Lettings </title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d1a510d7"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            OC_Lettings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Guide du projet</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Guide de démarrage rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture et structure des données</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Déploiement</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Référence de l'API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lettings.html">lettings package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiles.html">profiles package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../oc_lettings_site.html">oc_lettings_site package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OC_Lettings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">lettings.tests</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de lettings.tests</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tests unitaires pour l&#39;application lettings.</span>
+
+<span class="sd">Couvre les modèles Address et Letting, ainsi que les vues</span>
+<span class="sd">et URLs associées (liste et détail des locations).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.test</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestCase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Address</span><span class="p">,</span> <span class="n">Letting</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">reverse</span>
+
+
+<div class="viewcode-block" id="AddressModelTest">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.AddressModelTest">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AddressModelTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests unitaires pour le modèle Address.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AddressModelTest.setUp">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.AddressModelTest.setUp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Crée une adresse de test réutilisée dans chaque test.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">Address</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">street</span><span class="o">=</span><span class="s1">&#39;Main Street&#39;</span><span class="p">,</span>
+            <span class="n">city</span><span class="o">=</span><span class="s1">&#39;Los Angeles&#39;</span><span class="p">,</span>
+            <span class="n">state</span><span class="o">=</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+            <span class="n">zip_code</span><span class="o">=</span><span class="mi">90001</span><span class="p">,</span>
+            <span class="n">country_iso_code</span><span class="o">=</span><span class="s1">&#39;USA&#39;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AddressModelTest.test_address_str">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.AddressModelTest.test_address_str">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_address_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que __str__ retourne &#39;numéro rue&#39;.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">),</span> <span class="s1">&#39;10 Main Street&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AddressModelTest.test_address_fields">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.AddressModelTest.test_address_fields">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_address_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que les champs sont correctement enregistrés.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">city</span><span class="p">,</span> <span class="s1">&#39;Los Angeles&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">zip_code</span><span class="p">,</span> <span class="mi">90001</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">country_iso_code</span><span class="p">,</span> <span class="s1">&#39;USA&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AddressModelTest.test_address_verbose_name_plural">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.AddressModelTest.test_address_verbose_name_plural">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_address_verbose_name_plural</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que le pluriel affiché est bien &#39;Addresses&#39;.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">Address</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">verbose_name_plural</span><span class="p">),</span> <span class="s1">&#39;Addresses&#39;</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LettingModelTest">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingModelTest">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LettingModelTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests unitaires pour le modèle Letting.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LettingModelTest.setUp">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingModelTest.setUp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Crée une adresse et une location de test.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">Address</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">number</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+            <span class="n">street</span><span class="o">=</span><span class="s1">&#39;Sunset Blvd&#39;</span><span class="p">,</span>
+            <span class="n">city</span><span class="o">=</span><span class="s1">&#39;Hollywood&#39;</span><span class="p">,</span>
+            <span class="n">state</span><span class="o">=</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+            <span class="n">zip_code</span><span class="o">=</span><span class="mi">90028</span><span class="p">,</span>
+            <span class="n">country_iso_code</span><span class="o">=</span><span class="s1">&#39;USA&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letting</span> <span class="o">=</span> <span class="n">Letting</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Cozy Studio&#39;</span><span class="p">,</span>
+            <span class="n">address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LettingModelTest.test_letting_str">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingModelTest.test_letting_str">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_letting_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que __str__ retourne le titre de la location.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">letting</span><span class="p">),</span> <span class="s1">&#39;Cozy Studio&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LettingModelTest.test_letting_address_relation">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingModelTest.test_letting_address_relation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_letting_address_relation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que la relation OneToOne vers Address fonctionne.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">letting</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">letting</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">city</span><span class="p">,</span> <span class="s1">&#39;Hollywood&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LettingsIndexViewTest">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingsIndexViewTest">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LettingsIndexViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests unitaires pour la vue index (liste des locations).&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LettingsIndexViewTest.setUp">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingsIndexViewTest.setUp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Crée une adresse et une location de test.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">Address</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">number</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">street</span><span class="o">=</span><span class="s1">&#39;Rodeo Drive&#39;</span><span class="p">,</span>
+            <span class="n">city</span><span class="o">=</span><span class="s1">&#39;Beverly Hills&#39;</span><span class="p">,</span>
+            <span class="n">state</span><span class="o">=</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+            <span class="n">zip_code</span><span class="o">=</span><span class="mi">90210</span><span class="p">,</span>
+            <span class="n">country_iso_code</span><span class="o">=</span><span class="s1">&#39;USA&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letting</span> <span class="o">=</span> <span class="n">Letting</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Luxury Villa&#39;</span><span class="p">,</span>
+            <span class="n">address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LettingsIndexViewTest.test_index_status_code">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingsIndexViewTest.test_index_status_code">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_index_status_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que la page liste répond avec un statut 200.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;lettings:index&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LettingsIndexViewTest.test_index_uses_correct_template">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingsIndexViewTest.test_index_uses_correct_template">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_index_uses_correct_template</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que le bon template est utilisé.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;lettings:index&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;lettings/index.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LettingsIndexViewTest.test_index_contains_letting">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingsIndexViewTest.test_index_contains_letting">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_index_contains_letting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que la location créée apparaît bien dans le contexte.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;lettings:index&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">letting</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;lettings_list&#39;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="LettingsIndexViewTest.test_index_contains_letting_title_in_content">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingsIndexViewTest.test_index_contains_letting_title_in_content">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_index_contains_letting_title_in_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que le titre de la location s&#39;affiche dans la page.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;lettings:index&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;Luxury Villa&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LettingDetailViewTest">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingDetailViewTest">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LettingDetailViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests unitaires pour la vue letting (détail d&#39;une location).&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LettingDetailViewTest.setUp">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingDetailViewTest.setUp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Crée une adresse et une location de test.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">Address</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">number</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+            <span class="n">street</span><span class="o">=</span><span class="s1">&#39;Ocean Avenue&#39;</span><span class="p">,</span>
+            <span class="n">city</span><span class="o">=</span><span class="s1">&#39;Santa Monica&#39;</span><span class="p">,</span>
+            <span class="n">state</span><span class="o">=</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+            <span class="n">zip_code</span><span class="o">=</span><span class="mi">90401</span><span class="p">,</span>
+            <span class="n">country_iso_code</span><span class="o">=</span><span class="s1">&#39;USA&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letting</span> <span class="o">=</span> <span class="n">Letting</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Beach House&#39;</span><span class="p">,</span>
+            <span class="n">address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LettingDetailViewTest.test_letting_detail_status_code">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingDetailViewTest.test_letting_detail_status_code">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_letting_detail_status_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que la page détail répond avec un statut 200.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;lettings:letting&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">letting</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LettingDetailViewTest.test_letting_detail_uses_correct_template">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingDetailViewTest.test_letting_detail_uses_correct_template">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_letting_detail_uses_correct_template</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que le bon template est utilisé.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;lettings:letting&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">letting</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;lettings/letting.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LettingDetailViewTest.test_letting_detail_context">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingDetailViewTest.test_letting_detail_context">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_letting_detail_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie que le contexte contient le bon titre et la bonne adresse.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;lettings:letting&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">letting</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span> <span class="s1">&#39;Beach House&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LettingDetailViewTest.test_letting_detail_nonexistent_id_returns_404">
+<a class="viewcode-back" href="../../lettings.tests.html#lettings.tests.LettingDetailViewTest.test_letting_detail_nonexistent_id_returns_404">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_letting_detail_nonexistent_id_returns_404</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Vérifie qu&#39;un ID inexistant renvoie bien une 404.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;lettings:letting&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="mi">9999</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">404</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2026, Arnaud.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

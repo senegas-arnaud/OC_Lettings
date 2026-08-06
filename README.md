@@ -2,6 +2,9 @@
 
 Site web d'Orange County Lettings
 
+ **Documentation technique complète** : disponible sur [Read The Docs](https://oc_lettings_senegas.readthedocs.io)
+
+
 ## Développement local
 
 ### Prérequis
