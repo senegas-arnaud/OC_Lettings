@@ -1,3 +1,10 @@
+"""
+Tests unitaires pour l'application profiles.
+
+Couvre le modèle Profile, ainsi que les vues et URLs
+associées (liste et détail des profils).
+"""
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse

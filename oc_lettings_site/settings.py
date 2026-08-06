@@ -1,3 +1,13 @@
+"""
+Configuration Django du projet oc_lettings_site.
+
+Ce module centralise tous les réglages du projet : applications
+installées, middlewares, base de données, fichiers statiques,
+logging, et intégration Sentry. Les valeurs sensibles (clé secrète,
+DSN Sentry) sont chargées depuis des variables d'environnement
+via python-decouple.
+"""
+
 import os
 from decouple import config
 import sentry_sdk

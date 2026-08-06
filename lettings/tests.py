@@ -1,3 +1,10 @@
+"""
+Tests unitaires pour l'application lettings.
+
+Couvre les modèles Address et Letting, ainsi que les vues
+et URLs associées (liste et détail des locations).
+"""
+
 from django.test import TestCase
 from .models import Address, Letting
 from django.urls import reverse

@@ -1,3 +1,10 @@
+"""
+Tests unitaires pour l'application oc_lettings_site.
+
+Couvre la vue index (page d'accueil) ainsi que les pages
+d'erreur personnalisées 404 et 500.
+"""
+
 from django.test import TestCase
 from django.urls import reverse
 
